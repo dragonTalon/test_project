@@ -13,14 +13,14 @@ import java.io.IOException;
  * @Date 2022/7/28 2:50 下午
  * @Description
  **/
-@WebFilter(filterName = "myFilter",urlPatterns = {"/*"})
+@WebFilter(filterName = "myFilter", urlPatterns = {"/*"})
 public class MyFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         try {
             final String trace = TraceUtils.getTrace();
-            System.out.println("http tracae " + trace);
+            System.out.println(Thread.currentThread().getName() + " http tracae " + trace);
             filterChain.doFilter(servletRequest, servletResponse);
         } finally {
             TraceUtils.remove();
